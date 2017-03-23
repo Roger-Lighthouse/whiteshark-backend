@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/login'
+
   resources :beers
   root 'beers#index'
 
