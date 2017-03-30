@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329222251) do
+ActiveRecord::Schema.define(version: 20170330152300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(version: 20170329222251) do
     t.string   "email"
   end
 
+  create_table "jobs", force: :cascade do |t|
+    t.integer  "client_id"
+    t.string   "jobdesc"
+    t.decimal  "price"
+    t.date     "sdate"
+    t.string   "stime"
+    t.date     "datebi"
+    t.string   "crew"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_jobs_on_client_id", using: :btree
+  end
+
   create_table "prices", force: :cascade do |t|
     t.integer  "client_id"
     t.decimal  "w1"
@@ -39,6 +52,17 @@ ActiveRecord::Schema.define(version: 20170329222251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_prices_on_client_id", using: :btree
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "job_id"
+    t.string   "tran_type"
+    t.string   "tran_method"
+    t.decimal  "amount"
+    t.date     "tran_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["job_id"], name: "index_transactions_on_job_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,5 +73,7 @@ ActiveRecord::Schema.define(version: 20170329222251) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "jobs", "clients"
   add_foreign_key "prices", "clients"
+  add_foreign_key "transactions", "jobs"
 end

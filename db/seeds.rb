@@ -9,8 +9,18 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #Beer.all.delete_all
-Client.all.delete_all
-Price.all.delete_all
+
+
+def getW1Price
+  rand(15..40) * 5
+end
+
+def getEHPrice
+  rand(15..30) * 5
+end
+
+Client.delete_all
+Price.delete_all
 
 Beer.create!(name: 'Beer 1', abv: 4.5)
 Beer.create!(name: 'Beer 2', abv: 5)
@@ -29,9 +39,9 @@ while(x<50) do
   )
 
   Price.create!(client_id: c.id,
-
-
-    )
+    w1: getW1Price,
+    eh: getEHPrice
+  )
 
 
   x+=1
