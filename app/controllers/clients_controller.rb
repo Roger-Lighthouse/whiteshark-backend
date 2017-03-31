@@ -6,6 +6,7 @@ class ClientsController<ApplicationController
   def show
     id = params[:id]
     @client = Client.find(id)
+    @prices = Price.where("client_id = ?", id)
   end
 
   def foo

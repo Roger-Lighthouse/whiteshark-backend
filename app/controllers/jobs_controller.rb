@@ -6,11 +6,11 @@ class JobsController < ApplicationController
     #puts params
 
     job = Job.new
-    job.client_id = params[:client_id]
-    job.jobdesc = params[:jobdesc]
-    job.price = params[:price]
-    job.sdate = params[:sdate]
-    job.stime = '10am'
+    job.client_id = params[:clientId]
+    job.jobdesc = params[:jobDesc]
+    job.price = params[:jobPrice]
+    job.sdate = params[:jobDate]
+    job.stime = params[:jobTime]
     job.save!
     @jobs = Job.where("client_id = ?", job.client_id)
 
