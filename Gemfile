@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
 gem 'pry'
 gem 'faker', '~> 1.7.3'
+gem 'prawn', '~> 2.2.2'
 
 
 group :development, :test do
