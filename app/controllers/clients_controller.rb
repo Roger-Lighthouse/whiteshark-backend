@@ -9,6 +9,14 @@ class ClientsController<ApplicationController
     @prices = Price.where("client_id = ?", id)
   end
 
+  def update
+    id = params[:id]
+    @client = Client.find(id)
+    @client.name = params[:name]
+    @client.phone = params[:phone]
+    @client.email = params[:email]
+  end
+
   def foo
     puts 'bar'
   end
