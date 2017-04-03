@@ -1,0 +1,2 @@
+class JobLog < ApplicationRecord
+end

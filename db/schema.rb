@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170402004522) do
+ActiveRecord::Schema.define(version: 20170403165858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 20170402004522) do
     t.string   "email"
   end
 
+  create_table "job_logs", force: :cascade do |t|
+    t.integer  "job_id"
+    t.string   "log_type"
+    t.date     "log_date"
+    t.string   "stime"
+    t.date     "datebi"
+    t.string   "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_job_logs_on_job_id", using: :btree
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.integer  "client_id"
     t.string   "jobdesc"
@@ -43,6 +55,7 @@ ActiveRecord::Schema.define(version: 20170402004522) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "recstatus"
+    t.string   "notes"
     t.index ["client_id"], name: "index_jobs_on_client_id", using: :btree
   end
 
@@ -74,6 +87,7 @@ ActiveRecord::Schema.define(version: 20170402004522) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "job_logs", "jobs"
   add_foreign_key "jobs", "clients"
   add_foreign_key "prices", "clients"
   add_foreign_key "transactions", "jobs"

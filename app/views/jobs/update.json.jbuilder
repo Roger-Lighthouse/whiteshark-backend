@@ -27,5 +27,8 @@ json.completed_jobs @completed_jobs do |job|
   json.sdate job.sdate
   json.stime job.stime
   json.crew job.crew
+  json.datebi job.datebi
   json.recstatus job.recstatus
+  json.job_logs job.logs
+
 end

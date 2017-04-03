@@ -16,16 +16,33 @@ Rails.application.routes.draw do
   end
 
   resources :jobs
+  resources :job_logs
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources "clients"  do
+
     collection do
     end
 
+    member do
+    end
 
   end
 
+
+  resources "jobs"  do
+
+    collection do
+    end
+
+    member do
+      get 'print_pdf'
+      post 'edit'
+      get 'paid'
+    end
+
+  end
 
 end

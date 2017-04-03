@@ -1,4 +1,8 @@
 class ClientsController<ApplicationController
+
+  #http_basic_authenticate_with name: 'alex' , password: 'great'
+
+
   def index
     @clients = Client.all
   end
