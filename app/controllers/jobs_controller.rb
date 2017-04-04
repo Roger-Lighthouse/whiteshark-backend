@@ -67,9 +67,18 @@ class JobsController < ApplicationController
   def update
     id = params[:id]
     job = Job.find id
+    client = job.client
+    prices = client.prices
     job.datebi = Date.today
-    job.crew = 'Jason Burke'
+    job.crew = getCrew
     job.recstatus = 'Receivable'
+    if job.jobdesc == 'W3'
+      job.price = getW3price prices.w1
+    elsif job.jobdesc == 'W4'
+      job.price = getW4price prices.w1
+    elsif job.jobdesc == 'Painting'
+      job.price = getPaintPrice
+    end
     job.save!
     getJobs(job.client_id)
   end
@@ -103,8 +112,6 @@ class JobsController < ApplicationController
          type: "application/pdf",
          disposition: "inline"
        end
-      #format.json { render(json: 'fsfsfsf') }
-
     end
   end
 
@@ -141,5 +148,23 @@ class JobsController < ApplicationController
          @upcoming_jobs<<job
        end
      end
+   end
+
+   def getW3Price w1
+     price = rand(2..3) * w1
+   end
+
+   def getW4Price w1
+     price = rand(3..4) * w1
+   end
+
+   def getPaintPrice w1
+     price = rand(1..4) * 1000
+   end
+
+   def getCrew
+     x = rand(0..3)
+     crews = ['Jason Burke', 'David Cummings', 'Joel Caprani', 'Noel Brown']
+     return crews[x]
    end
 end
