@@ -50,13 +50,13 @@ Rails.application.configure do
 
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.1and1.com",
+    address: "smtp.mailgun.org",
     port: 587,
-    domain: "whiteshark.ca",
+    domain: "sandbox132884734dd74fc0914128d1ac084a44.mailgun.org",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name:     ENV["1AND1_USERNAME"],
-    password:   ENV["1AND1_PASSWORD"]
+    user_name:  'postmaster@sandbox132884734dd74fc0914128d1ac084a44.mailgun.org', #  ENV["1AND1_USERNAME"],
+    password:   '8888f9b4213b0c3f46e0eb543109758d'  # ENV["1AND1_PASSWORD"]
   }
 
   config.action_mailer.default_url_options = { host: "localhost:3000"}

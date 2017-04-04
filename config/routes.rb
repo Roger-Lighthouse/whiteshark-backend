@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     end
 
     member do
-      get 'print_pdf'
+      get 'pdf_mailer'
       post 'edit'
       get 'paid'
     end

@@ -108,7 +108,7 @@ class JobsController < ApplicationController
     end
   end
 
-  def print_pdf
+  def pdf_mailer
     @job = Job.find(params[:id])
     pdf = nil
     respond_to do |format|
@@ -117,12 +117,11 @@ class JobsController < ApplicationController
        format.pdf do
          pdf = InvoicePdf.new(@job, view_context)
          send_data pdf.render, filename: "Job Invoice_#{ @job.id }.pdf",
-         type: "application/pdf",
-         disposition: "inline"
+         type: "application/pdf"
+         #disposition: "inline"
        end
-
     end
-    return @pdf
+    PdfMailer.pdf_mailer(@job, pdf).deliver
   end
 
 
