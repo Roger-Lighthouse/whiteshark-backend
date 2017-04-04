@@ -42,7 +42,7 @@ class InvoicePdf < Prawn::Document
 
     [[@job.id, 'eheh', @job.jobdesc, price(@job.price)]] +
 
-    [[{content: 'Total', :colspan=>3, :font_style=> :bold}, price(@job.price)]]
+    [[{content: 'Sub Total', :colspan=>3, :font_style=> :bold}, price(@job.price)]]
   end
 
   def price(num)
