@@ -35,12 +35,14 @@ Rails.application.routes.draw do
   resources "jobs"  do
 
     collection do
+
     end
 
     member do
       get 'pdf_mailer'
       post 'edit'
       get 'paid'
+      get 'get_jobs'
     end
 
   end

@@ -6,4 +6,5 @@ json.upcoming_jobs @upcoming_jobs do |job|
   json.price job.price
   json.sdate job.sdate
   json.stime job.stime
+  json.notes job.notes
 end

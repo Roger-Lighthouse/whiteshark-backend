@@ -1,4 +1,3 @@
-
 json.upcoming_jobs @upcoming_jobs do |job|
   json.id job.id
   json.client_id job.client_id
@@ -36,5 +35,7 @@ json.completed_jobs @completed_jobs do |job|
   json.recstatus job.recstatus
   json.job_logs job.logs
   json.notes job.notes
-
 end
+
+
+

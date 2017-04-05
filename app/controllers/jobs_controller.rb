@@ -4,20 +4,17 @@ class JobsController < ApplicationController
   def create
     puts 'Got Here IN CREATE ************'
     puts params.inspect
-    #puts 'Request' + request.body.username
-    #puts params
-
-    params[:jobTime] = '10 AM'
-
     job = Job.new
     job.client_id = params[:clientId]
     job.jobdesc = params[:jobDesc]
-    job.price = params[:jobPrice]
+    if params[:jobPrice]!='TBD'
+      job.price = params[:jobPrice]
+    end
     job.sdate = params[:jobDate]
     job.stime = params[:jobTime]
     job.save!
 
-#=begin
+=begin
     job = Job.new
     job.client_id = params[:clientId]
     job.jobdesc = params[:jobDesc]
@@ -52,8 +49,8 @@ class JobsController < ApplicationController
     job.datebi = Date.today-10
     job.stime = params[:jobTime]
     job.save!
-#=end
-    getJobs(params[:client_id])
+=end
+    getJobs(params[:client_Id])
   end
 
   def destroy
@@ -88,6 +85,7 @@ class JobsController < ApplicationController
     job = Job.find id
     job.sdate = params[:jobDate]
     job.stime = params[:jobTime]
+    job.notes = params[:jobDetails]
     job.save
     @upcoming_jobs = Job.where("client_id =? and sdate > ?", job.client_id, Date.today)
    end
@@ -99,6 +97,12 @@ class JobsController < ApplicationController
      job.save
      @completed_jobs = Job.where("client_id =? and datebi is not null", job.client_id)
    end
+
+  def get_jobs
+     cfid = params[:id]
+     getJobs(cfid)
+   end
+
 
   def show
     @job = Job.find(params[:id])

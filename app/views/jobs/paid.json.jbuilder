@@ -10,5 +10,5 @@ json.completed_jobs @completed_jobs do |job|
   json.datebi job.datebi
   json.recstatus job.recstatus
   json.job_logs job.logs
-
+  json.notes job.notes
 end

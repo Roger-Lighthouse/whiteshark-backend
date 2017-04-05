@@ -6,21 +6,26 @@ class InvoicePdf < Prawn::Document
     @view = view
     invoice_number
     line_items
-    image ='../images/WhiteShark.png'
+    # image ='../images/WhiteShark.png'
 
+     stroke_axis
 
-    table [
-           ["Standard image cell", {:image => image}],
-           [":scale => 0.5", {:image => image, :scale => 0.5}],
-           [":fit => [100, 200]", {:image => image, :fit => [100, 200]}],
-           [":image_height => 50,
-           :image_width => 100", {:image => image, :image_height => 50,
-           :image_width => 100}],
-           [":position => :center", {:image => image, :position => :center}],
-           [":vposition => :center", {:image => image, :vposition => :center,
-           :height => 200}]
-          ], :width => bounds.width
-  end
+     bounding_box([100, 300], :width =>300, :height =>200) do
+       stroke_bounds
+     end
+
+  #   table [
+  #          ["Standard image cell", {:image => image}],
+  #          [":scale => 0.5", {:image => image, :scale => 0.5}],
+  #          [":fit => [100, 200]", {:image => image, :fit => [100, 200]}],
+  #          [":image_height => 50,
+  #          :image_width => 100", {:image => image, :image_height => 50,
+  #          :image_width => 100}],
+  #          [":position => :center", {:image => image, :position => :center}],
+  #          [":vposition => :center", {:image => image, :vposition => :center,
+  #          :height => 200}]
+  #         ], :width => bounds.width
+   end
 
 
   def invoice_number

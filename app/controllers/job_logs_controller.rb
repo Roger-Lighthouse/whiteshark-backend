@@ -13,7 +13,7 @@ class JobLogsController < ApplicationController
 
     id = params[:jobID]
     job = Job.find id
-    fake_seed(params[:jobID], "Sign Pick Up", Date.today, nil, 'Test Logs')
+    #fake_seed(params[:jobID], "Sign Pick Up", Date.today, nil, 'Test Logs')
     #@job_logs = []
     @completed_jobs = Job.where("client_id =? and datebi is not null", job.client_id)
     # @completed_jobs.each do |cj|

@@ -6,6 +6,7 @@ json.upcoming_jobs @upcoming_jobs do |job|
   json.price job.price
   json.sdate job.sdate
   json.stime job.stime
+  json.notes job.notes
 end
 
 
@@ -17,6 +18,7 @@ json.current_jobs @current_jobs do |job|
   json.price job.price
   json.sdate job.sdate
   json.stime job.stime
+  json.notes job.notes
 end
 
 
@@ -31,6 +33,6 @@ json.completed_jobs @completed_jobs do |job|
   json.crew job.crew
   json.datebi job.datebi
   json.recstatus job.recstatus
+  json.notes job.notes
   json.job_logs job.logs
-
 end
