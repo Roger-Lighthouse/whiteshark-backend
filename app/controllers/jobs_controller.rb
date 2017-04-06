@@ -11,46 +11,15 @@ class JobsController < ApplicationController
       job.price = params[:jobPrice]
     end
     job.sdate = params[:jobDate]
-    job.stime = params[:jobTime]
+    if params[:jobTime] == '0'
+      job.stime = 'Anytime'
+    else
+      job.stime = params[:jobTime]
+    end
+    job.notes = params[:jobDetails]
     job.save!
 
-=begin
-    job = Job.new
-    job.client_id = params[:clientId]
-    job.jobdesc = params[:jobDesc]
-    job.price = params[:jobPrice]
-    job.sdate = Date.today + 5
-    job.stime = params[:jobTime]
-    job.save!
-
-
-    job = Job.new
-    job.client_id = params[:clientId]
-    job.jobdesc = params[:jobDesc]
-    job.price = params[:jobPrice]
-    job.sdate = Date.today
-    job.stime = params[:jobTime]
-    job.save!
-
-    job = Job.new
-    job.client_id = params[:clientId]
-    job.jobdesc = params[:jobDesc]
-    job.price = params[:jobPrice]
-    job.sdate = Date.today-5
-    job.datebi = Date.today-5
-    job.stime = params[:jobTime]
-    job.save!
-
-    job = Job.new
-    job.client_id = params[:clientId]
-    job.jobdesc = params[:jobDesc]
-    job.price = params[:jobPrice]
-    job.sdate = Date.today-10
-    job.datebi = Date.today-10
-    job.stime = params[:jobTime]
-    job.save!
-=end
-    getJobs(params[:client_Id])
+    getJobs(params[:clientId])
   end
 
   def destroy
@@ -70,9 +39,9 @@ class JobsController < ApplicationController
     job.crew = getCrew
     job.recstatus = 'Receivable'
     if job.jobdesc == 'W3'
-      job.price = getW3price prices.w1
+      job.price = getW3Price prices.w1
     elsif job.jobdesc == 'W4'
-      job.price = getW4price prices.w1
+      job.price = getW4Price prices.w1
     elsif job.jobdesc == 'Painting'
       job.price = getPaintPrice
     end
@@ -87,7 +56,8 @@ class JobsController < ApplicationController
     job.stime = params[:jobTime]
     job.notes = params[:jobDetails]
     job.save
-    @upcoming_jobs = Job.where("client_id =? and sdate > ?", job.client_id, Date.today)
+    #@upcoming_jobs = Job.where("client_id =? and sdate > ?", job.client_id, Date.today)
+    getJobs(job.client.id)
    end
 
    def paid
@@ -95,10 +65,10 @@ class JobsController < ApplicationController
      job = Job.find id
      job.recstatus = 'PAID'
      job.save
-     @completed_jobs = Job.where("client_id =? and datebi is not null", job.client_id)
+     @completed_jobs = Job.where("client_id =? and datebi is not null", job.client_id).order('datebi desc')
    end
 
-  def get_jobs
+   def get_jobs
      cfid = params[:id]
      getJobs(cfid)
    end
@@ -142,7 +112,7 @@ class JobsController < ApplicationController
      @completed_jobs = []
      @current_jobs = []
      @upcoming_jobs = []
-     jobs = Job.where("client_id = ?", client_id)
+     jobs = Job.where("client_id = ?", client_id).order('datebi desc, sdate')
      jobs.each do |job|
        if job.datebi != nil
          @completed_jobs<<job
@@ -162,7 +132,7 @@ class JobsController < ApplicationController
      price = rand(3..4) * w1
    end
 
-   def getPaintPrice w1
+   def getPaintPrice
      price = rand(1..4) * 1000
    end
 

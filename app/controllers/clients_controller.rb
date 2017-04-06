@@ -19,6 +19,7 @@ class ClientsController<ApplicationController
     @client.name = params[:name]
     @client.phone = params[:phone]
     @client.email = params[:email]
+    @client.save
   end
 
   def foo
