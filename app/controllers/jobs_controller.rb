@@ -105,6 +105,15 @@ class JobsController < ApplicationController
     PdfMailer.pdf_mailer(@job, pdf).deliver
   end
 
+  def getSigns
+    @signPickUps = []
+    12.times do
+      x = rand(1..50)
+      client = Client.find x
+      @signPickUps<<client
+    end
+    return @signPickUps
+  end
 
   private
 

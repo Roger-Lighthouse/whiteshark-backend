@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       post 'edit'
       get 'paid'
       get 'get_jobs'
+      get 'getSigns', format: 'json'
     end
 
   end
