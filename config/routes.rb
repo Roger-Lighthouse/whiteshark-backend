@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
+  devise_for :users
+
   get 'jobs/create'
 
-  get 'users/login'
+  # get 'users/login'
 
   resources :beers
   root 'beers#index'
 
 
-  resources :users
+  # resources :users
 
   resources :clients do
     resources :jobs do

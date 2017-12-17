@@ -29,6 +29,7 @@ gem 'faker', '~> 1.7.3'
 gem 'prawn', '~> 1.2.1'
 gem 'prawn-table', '~> 0.1.0'
 gem 'mailgun', '~>0.8'
+gem 'devise'
 
 
 group :development, :test do
