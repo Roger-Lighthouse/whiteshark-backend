@@ -25,8 +25,8 @@ Price.delete_all
 Beer.create!(name: 'Beer 1', abv: 4.5)
 Beer.create!(name: 'Beer 2', abv: 5)
 
-User.create!(name: 'Alex', email: 'alex@thegreat.ca', password: '123456')
-User.create!(name: 'Roger', email: 'roger@devops.ca', password: '123456')
+User.create!(name: 'Alex', email: 'alex@thegreat.ca')
+User.create!(name: 'Roger', email: 'roger@devops.ca')
 
 
 x=0
